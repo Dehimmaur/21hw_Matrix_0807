@@ -7,7 +7,7 @@ import telran.multiarray.tools.MatrixMy;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class MatrixTestMy {
+public class MatrixMyTest {
 
     @ParameterizedTest
     @CsvFileSource(resources = "/matrix.csv", numLinesToSkip = 1)
@@ -29,6 +29,15 @@ public class MatrixTestMy {
         MatrixMy m2 = new MatrixMy(matrix2);
         assertTrue(m1.equalsMatrix(copyM1));
         assertFalse(m1.equalsMatrix(m2));
+    }
+
+    @Test
+    void testTransp(){
+        int[][] arr1 = {{1,2,3}};
+        int[][] arr2 = {{1},{2},{3}};
+        MatrixMy matrix1 = new MatrixMy(arr1);
+        MatrixMy matrix2 = new MatrixMy(arr2);
+        assertTrue(matrix1.equalsMatrix(matrix2.transp()));
     }
 
     @Test
@@ -54,10 +63,10 @@ public class MatrixTestMy {
         System.out.println("matrix1: ");
         matrix1.showMatrix();
         MatrixMy matrix2 = new MatrixMy(matrix1);
-        matrix2.changeCell(0, 0, 0);
-        matrix2.changeCell(1, 1, 0);
-        matrix2.changeCell(2, 2, 0);
-        matrix2.changeCell(3, 3, 0);
+        assertTrue(matrix2.changeCell(0, 0, 0));
+        assertTrue(matrix2.changeCell(1, 1, 0));
+        assertTrue(matrix2.changeCell(2, 2, 0));
+        assertTrue(matrix2.changeCell(3, 3, 0));
         System.out.println("matrix2: ");
         matrix2.showMatrix();
         System.out.println("matrix1: ");

@@ -15,12 +15,14 @@ public class MatrixMy {
     }
 
     public MatrixMy transp() {
-        int rows = matrix.length;
-        int cols = matrix[0].length;
-        int[][] res = new int[cols][rows];
-        for (int i = 0; i < rows; i++)
-            for (int j = 0; j < cols; j++)
+        int length = matrix.length;
+        int height = matrix[0].length;
+        int[][] res = new int[height][length];
+        for (int i = 0; i < length; i++) {
+            for (int j = 0; j < height; j++) {
                 res[j][i] = matrix[i][j];
+            }
+        }
         return new MatrixMy(res);
     }
 
@@ -40,28 +42,27 @@ public class MatrixMy {
         return true;
     }
 
-    public MatrixMy multiply(MatrixMy other) {
-        int[][] otherMatrix = other.matrix;
-        int rows = matrix.length;
-        int cols = otherMatrix[0].length;
-        int common = matrix[0].length;
-        int[][] result = new int[rows][cols];
-
-        for (int i = 0; i < rows; i++)
-            for (int j = 0; j < cols; j++)
-                for (int k = 0; k < common; k++)
+    public MatrixMy multiply(MatrixMy secondMatrix) {
+        int[][] otherMatrix = secondMatrix.matrix;
+        int length = matrix.length;
+        int height = otherMatrix[0].length;
+        int vals = matrix[0].length;
+        int[][] result = new int[length][height];
+        for (int i = 0; i < length; i++) {
+            for (int j = 0; j < height; j++) {
+                for (int k = 0; k < vals; k++) {
                     result[i][j] += matrix[i][k] * otherMatrix[k][j];
-
+                }
+            }
+        }
         return new MatrixMy(result);
     }
 
     public int sum() {
         int sum = 0;
-        for (int[] row : this.matrix) {
-            for (int val : row) {
+        for (int[] row : this.matrix)
+            for (int val : row)
                 sum += val;
-            }
-        }
         return sum;
     }
 
